@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -7,6 +7,10 @@
 
   <ItemGroup>
     <PackageReference Include="NEST" Version="7.11.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sample.ElasticApm.Persistence\Sample.ElasticApm.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

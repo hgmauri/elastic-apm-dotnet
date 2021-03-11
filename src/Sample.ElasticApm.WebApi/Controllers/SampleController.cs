@@ -30,6 +30,14 @@ namespace Sample.ElasticApm.WebApi.Controllers
             return BadRequest();
         }
 
+        [HttpPost("sample-sql")]
+        public IActionResult PostDataSql()
+        {
+            _sampleApplication.PostDataSql();
+
+            return Ok();
+        }
+
         [HttpGet("")]
         public IActionResult GetAll()
         {

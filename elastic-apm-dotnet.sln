@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.ElasticApm.WebApi", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.ElasticApm.WebApi.Core", "src\Sample.ElasticApm.WebApi.Core\Sample.ElasticApm.WebApi.Core.csproj", "{B5CD0238-4A34-4447-8137-61EDCFCD4244}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.ElasticApm.Persistence", "src\Sample.ElasticApm.Persistence\Sample.ElasticApm.Persistence.csproj", "{358A4E63-B742-41DE-9479-C7EE155507A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{B5CD0238-4A34-4447-8137-61EDCFCD4244}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5CD0238-4A34-4447-8137-61EDCFCD4244}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5CD0238-4A34-4447-8137-61EDCFCD4244}.Release|Any CPU.Build.0 = Release|Any CPU
+		{358A4E63-B742-41DE-9479-C7EE155507A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{358A4E63-B742-41DE-9479-C7EE155507A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{358A4E63-B742-41DE-9479-C7EE155507A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{358A4E63-B742-41DE-9479-C7EE155507A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -45,6 +51,7 @@ Global
 		{8658634B-3465-4D05-8E17-C56D5DD99B7C} = {E28E2BD8-FC75-4726-89D4-60BA3D739963}
 		{658ECB5B-3750-41E9-9639-66204FEA6249} = {1F4C7FFA-7156-4355-A604-34293A63EDB1}
 		{B5CD0238-4A34-4447-8137-61EDCFCD4244} = {1F4C7FFA-7156-4355-A604-34293A63EDB1}
+		{358A4E63-B742-41DE-9479-C7EE155507A3} = {E28E2BD8-FC75-4726-89D4-60BA3D739963}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EED24293-FCEB-4257-A890-7B61D64A99FE}

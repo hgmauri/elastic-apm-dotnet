@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Sample.ElasticApm.WebApi.Core.Extensions;
 using Sample.ElasticApm.WebApi.Core.Middleware;
-using Serilog;
 
 namespace Sample.ElasticApm.WebApi
 {
@@ -27,8 +26,10 @@ namespace Sample.ElasticApm.WebApi
             services.AddRouting(options => options.LowercaseUrls = true);
 
             services.AddElasticsearch(Configuration);
+            services.AddSqlDatabase(Configuration);
             services.AddServices();
             services.AddSwagger(Configuration);
+
             services.AddHealthCheckApi(Configuration);
 
             services.AddResponseCompression();
@@ -51,14 +52,12 @@ namespace Sample.ElasticApm.WebApi
             app.UseMiddleware<ErrorHandlingMiddleware>();
                 
             app.UseSwaggerDoc();
-
             app.UseElasticApm(Configuration);
+            
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseHealthCheckApi();
 
             app.UseEndpoints(endpoints =>

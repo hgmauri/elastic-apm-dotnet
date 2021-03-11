@@ -35,8 +35,6 @@ namespace Sample.ElasticApm.WebApi.Core.Middleware
             var code = HttpStatusCode.InternalServerError;
 
             if (exception is Exception) code = HttpStatusCode.BadRequest;
-            // else if (exception is MyUnauthorizedException) code = HttpStatusCode.Unauthorized;
-            // else if (exception is MyException)             code = HttpStatusCode.BadRequest;
 
             var result = JsonConvert.SerializeObject(new { error = exception.Message });
 
