@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Sample.ElasticApm.Domain.Indices;
 using Sample.ElasticApm.Domain.Model;
 
 namespace Sample.ElasticApm.Domain.Concrete
 {
-    public interface IActorsApplication
+    public interface ISampleApplication
     {
         void PostActorsSample();
+        void PostSampleException();
         ICollection<IndexActors> GetAll();
-        ICollection<IndexActors> GetByName(string name);
-        ICollection<IndexActors> GetByDescription(string description);
-        ICollection<IndexActors> GetActorsCondition(string name, string description, DateTime? birthdate);
         ICollection<IndexActors> GetActorsAllCondition(string term);
         ActorsAggregationModel GetActorsAggregation();
+        Task GetGoogle();
     }
 }

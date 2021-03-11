@@ -47,8 +47,6 @@ namespace Sample.ElasticApm.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseSerilogRequestLogging(opts => opts.EnrichDiagnosticContext = LogEnricherExtensions.EnrichFromRequest);
-
             app.UseMiddleware<RequestSerilLogMiddleware>();
             app.UseMiddleware<ErrorHandlingMiddleware>();
                 

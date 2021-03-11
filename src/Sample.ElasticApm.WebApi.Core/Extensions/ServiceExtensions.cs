@@ -9,7 +9,7 @@ namespace Sample.ElasticApm.WebApi.Core.Extensions
     {
         public static void AddServices(this IServiceCollection services)
         {
-            services.AddTransient<IActorsApplication, ActorsApplication>();
+            services.AddTransient<ISampleApplication, SampleApplication>();
             services.AddScoped<IMyCustomService, MyCustomService>();
         }
     }
