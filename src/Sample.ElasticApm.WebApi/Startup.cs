@@ -52,6 +52,7 @@ namespace Sample.ElasticApm.WebApi
             app.UseMiddleware<ErrorHandlingMiddleware>();
                 
             app.UseSwaggerDoc();
+
             app.UseElasticApm(Configuration);
             
             app.UseHttpsRedirection();

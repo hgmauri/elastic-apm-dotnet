@@ -50,7 +50,7 @@ namespace Sample.ElasticApm.Domain.Application
             pessoa.DataNascimento = DateTime.Now;
             pessoa.Endereco = "Teste teste teste teste teste teste teste teste teste teste teste teste teste ";
             
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 100; i++)
             {
                 pessoa.Id = Guid.NewGuid();
                 pessoa.Nome = $"Pessoa teste {i}";
