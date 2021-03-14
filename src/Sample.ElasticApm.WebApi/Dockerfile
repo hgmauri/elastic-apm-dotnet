@@ -5,10 +5,12 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
+
 COPY ["Sample.ElasticApm.WebApi/Sample.ElasticApm.WebApi.csproj", "Sample.ElasticApm.WebApi/"]
 COPY ["Sample.ElasticApm.WebApi.Core/Sample.ElasticApm.WebApi.Core.csproj", "Sample.ElasticApm.WebApi.Core/"]
 COPY ["Sample.ElasticApm.Domain/Sample.ElasticApm.Domain.csproj", "Sample.ElasticApm.Domain/"]
 RUN dotnet restore "Sample.ElasticApm.WebApi/Sample.ElasticApm.WebApi.csproj"
+
 COPY . .
 WORKDIR "/src/Sample.ElasticApm.WebApi"
 RUN dotnet build "Sample.ElasticApm.WebApi.csproj" -c Release -o /app/build

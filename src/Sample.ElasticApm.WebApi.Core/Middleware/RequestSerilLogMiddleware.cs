@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Primitives;
 using Serilog.Context;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Sample.ElasticApm.WebApi.Core.Middleware

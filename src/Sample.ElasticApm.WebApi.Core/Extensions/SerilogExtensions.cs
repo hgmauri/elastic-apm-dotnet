@@ -1,7 +1,8 @@
 ﻿using System;
+using Elastic.Apm.SerilogEnricher;
+using Elastic.CommonSchema.Serilog;
 using Microsoft.Extensions.Configuration;
 using Serilog;
-using Serilog.Filters;
 using Serilog.Sinks.Elasticsearch;
 
 namespace Sample.ElasticApm.WebApi.Core.Extensions
@@ -17,8 +18,10 @@ namespace Sample.ElasticApm.WebApi.Core.Extensions
                 .Enrich.WithMachineName()
                 .Enrich.WithEnvironmentUserName()
                 .Enrich.WithDemystifiedStackTraces()
+                .Enrich.WithElasticApmCorrelationInfo()
                 .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(configuration["ElasticsearchSettings:uri"]))
                 {
+                    CustomFormatter = new EcsTextFormatter(),
                     AutoRegisterTemplate = true,
                     IndexFormat = "indexlogs",
                     ModifyConnectionSettings = x => x.BasicAuthentication(configuration["ElasticsearchSettings:username"], configuration["ElasticsearchSettings:password"])

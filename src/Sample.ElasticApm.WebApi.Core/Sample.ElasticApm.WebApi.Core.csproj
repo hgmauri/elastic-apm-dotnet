@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Elastic.Apm.SerilogEnricher" Version="1.5.1" />
     <PackageReference Include="Elastic.CommonSchema.Serilog" Version="1.5.1" />
     <PackageReference Include="Elastic.Apm.NetCoreAll" Version="1.8.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.4" />

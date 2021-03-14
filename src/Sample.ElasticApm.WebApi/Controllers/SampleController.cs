@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Sample.ElasticApm.Domain.Concrete;
 
 namespace Sample.ElasticApm.WebApi.Controllers

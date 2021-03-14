@@ -44,8 +44,8 @@ namespace Sample.ElasticApm.WebApi.Core.Extensions
 
         public static string ObterHostNameApiHealthCheck()
         {
-            var tt = Environment.GetEnvironmentVariable("HostNameHealthCheck") == null ? "/hc" : $"{Environment.GetEnvironmentVariable("HostNameHealthCheck")}/hc";
-            return tt;
+            var check = Environment.GetEnvironmentVariable("HostNameHealthCheck") == null ? "/hc" : $"{Environment.GetEnvironmentVariable("HostNameHealthCheck")}/hc";
+            return check;
         }
     }
 }
