@@ -68,5 +68,13 @@ namespace Sample.ElasticApm.WebApi.Controllers
 
             return Ok();
         }
+
+        [HttpGet("call-api")]
+        public IActionResult GetApiTest()
+        {
+            _sampleApplication.GetApiTest();
+
+            return Ok();
+        }
     }
 }

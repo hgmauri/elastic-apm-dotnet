@@ -33,6 +33,7 @@ namespace Sample.ElasticApm.WebApi
             services.AddHealthCheckApi(Configuration);
 
             services.AddResponseCompression();
+            services.AddHttpClient();
             services.Configure<GzipCompressionProviderOptions>(options =>
             {
                 options.Level = CompressionLevel.Optimal;

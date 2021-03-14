@@ -15,12 +15,14 @@ namespace Sample.ElasticApm.Domain.Application
     public class SampleApplication : ISampleApplication
     {
         private readonly IElasticClient _elasticClient;
+        private readonly IHttpClientFactory _client;
         private readonly SampleDataContext _context;
 
-        public SampleApplication(IElasticClient elasticClient, SampleDataContext context)
+        public SampleApplication(IElasticClient elasticClient, SampleDataContext context, IHttpClientFactory client)
         {
             _elasticClient = elasticClient;
             _context = context;
+            _client = client;
         }
 
         public void PostActorsSample()
@@ -68,10 +70,25 @@ namespace Sample.ElasticApm.Domain.Application
 
         public async Task GetGoogle()
         {
-            var httpClient = new HttpClient();
+            var httpClient = _client.CreateClient();
             var message = new HttpRequestMessage
             {
                 RequestUri = new Uri("https://google.com"),
+                Method = HttpMethod.Get,
+                Version = new Version(2, 0)
+            };
+
+            var response = await httpClient.SendAsync(message);
+
+            response.EnsureSuccessStatusCode();
+        }
+
+        public async Task GetApiTest()
+        {
+            var httpClient = _client.CreateClient();
+            var message = new HttpRequestMessage
+            {
+                RequestUri = new Uri("https://jsonplaceholder.typicode.com/todos"),
                 Method = HttpMethod.Get,
                 Version = new Version(2, 0)
             };
@@ -95,8 +112,8 @@ namespace Sample.ElasticApm.Domain.Application
             var query = new QueryContainerDescriptor<IndexActorsModel>().Bool(b => b.Must(m => m.Exists(e => e.Field(f => f.Description))));
             TryParse(term, out int numero);
 
-            query = query && new QueryContainerDescriptor<IndexActorsModel>().Wildcard(w => w.Field(f => f.Name).Value($"*{term}*")) //performance ruim, use MatchPhrasePrefix
-                    || new QueryContainerDescriptor<IndexActorsModel>().Wildcard(w => w.Field(f => f.Description).Value($"*{term}*")) //performance ruim, use MatchPhrasePrefix
+            query = query && new QueryContainerDescriptor<IndexActorsModel>().Wildcard(w => w.Field(f => f.Name).Value($"*{term}*")) 
+                    || new QueryContainerDescriptor<IndexActorsModel>().Wildcard(w => w.Field(f => f.Description).Value($"*{term}*"))
                     || new QueryContainerDescriptor<IndexActorsModel>().Term(w => w.Age, numero)
                     || new QueryContainerDescriptor<IndexActorsModel>().Term(w => w.TotalMovies, numero);
 

@@ -14,5 +14,6 @@ namespace Sample.ElasticApm.Domain.Concrete
         ICollection<IndexActorsModel> GetActorsAllCondition(string term);
         ActorsAggregationModel GetActorsAggregation();
         Task GetGoogle();
+        Task GetApiTest();
     }
 }
