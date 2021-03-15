@@ -7,7 +7,7 @@ namespace Sample.ElasticApm.Domain.Concrete
 {
     public interface ISampleApplication
     {
-        void PostActorsSample();
+        void PostSampleElastic();
         void PostSampleException();
         void PostDataSql();
         ICollection<IndexActorsModel> GetAll();

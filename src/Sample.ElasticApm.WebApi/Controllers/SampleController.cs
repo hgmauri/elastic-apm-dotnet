@@ -13,10 +13,10 @@ namespace Sample.ElasticApm.WebApi.Controllers
             _sampleApplication = sampleApplication;
         }
 
-        [HttpPost("sample")]
-        public IActionResult PostSampleData()
+        [HttpPost("elastic")]
+        public IActionResult PostSampleElastic()
         {
-            _sampleApplication.PostActorsSample();
+            _sampleApplication.PostSampleElastic();
 
             return Ok(new { Result = "Data successfully registered with Elasticsearch" });
         }
@@ -29,8 +29,8 @@ namespace Sample.ElasticApm.WebApi.Controllers
             return BadRequest();
         }
 
-        [HttpPost("sample-sql")]
-        public IActionResult PostDataSql()
+        [HttpPost("sql")]
+        public IActionResult PostSampleSql()
         {
             _sampleApplication.PostDataSql();
 

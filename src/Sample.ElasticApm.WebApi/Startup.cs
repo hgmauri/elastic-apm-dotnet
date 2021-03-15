@@ -32,12 +32,7 @@ namespace Sample.ElasticApm.WebApi
 
             services.AddHealthCheckApi(Configuration);
 
-            services.AddResponseCompression();
             services.AddHttpClient();
-            services.Configure<GzipCompressionProviderOptions>(options =>
-            {
-                options.Level = CompressionLevel.Optimal;
-            });
 
             services.AddControllers();
         }
@@ -59,7 +54,6 @@ namespace Sample.ElasticApm.WebApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseAuthorization();
             app.UseHealthCheckApi();
 
             app.UseEndpoints(endpoints =>

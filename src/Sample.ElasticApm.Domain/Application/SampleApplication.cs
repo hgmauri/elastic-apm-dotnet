@@ -25,7 +25,7 @@ namespace Sample.ElasticApm.Domain.Application
             _client = client;
         }
 
-        public void PostActorsSample()
+        public void PostSampleElastic()
         {
             var descriptor = new BulkDescriptor();
 
