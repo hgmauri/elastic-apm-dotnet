@@ -26,11 +26,13 @@ namespace Sample.ElasticApm.WebApi.Core.Extensions
 
             var client = new ElasticClient(settings);
 
+            //https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/lifetimes.html
             services.AddSingleton<IElasticClient>(client);
         }
 
         public static void UseElasticApm(this IApplicationBuilder app, IConfiguration configuration)
         {
+            //https://www.elastic.co/guide/en/apm/agent/dotnet/current/configuration-on-asp-net-core.html
             app.UseAllElasticApm(configuration);
         }
     }
