@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Sample.ElasticApm.Domain.Concrete;
+using Sample.ElasticApm.Domain.Interface;
 
 namespace Sample.ElasticApm.WebApi.Controllers
 {

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Sample.ElasticApm.Domain.Model;
 
-namespace Sample.ElasticApm.Domain.Concrete
+namespace Sample.ElasticApm.Domain.Interface
 {
     public interface ISampleApplication
     {

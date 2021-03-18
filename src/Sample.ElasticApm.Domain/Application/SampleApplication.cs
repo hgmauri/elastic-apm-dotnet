@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Nest;
-using Sample.ElasticApm.Domain.Concrete;
+using Sample.ElasticApm.Domain.Interface;
 using Sample.ElasticApm.Domain.Model;
 using Sample.ElasticApm.Persistence.Context;
 using Sample.ElasticApm.Persistence.Entity;
@@ -52,7 +52,7 @@ namespace Sample.ElasticApm.Domain.Application
             pessoa.DataNascimento = DateTime.Now;
             pessoa.Endereco = "Teste teste teste teste teste teste teste teste teste teste teste teste teste ";
             
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 200; i++)
             {
                 pessoa.Id = Guid.NewGuid();
                 pessoa.Nome = $"Pessoa teste {i}";
@@ -60,6 +60,8 @@ namespace Sample.ElasticApm.Domain.Application
             }
 
             _context.SaveChanges();
+
+            var pessoas = _context.Pessoas.Where(p => p.Nome.Contains("Pessoa")).ToList();
         }
 
 
