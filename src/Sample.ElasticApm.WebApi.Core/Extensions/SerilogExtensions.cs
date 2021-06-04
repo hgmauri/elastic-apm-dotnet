@@ -18,7 +18,6 @@ namespace Sample.ElasticApm.WebApi.Core.Extensions
                 .Enrich.FromLogContext()
                 .Enrich.WithMachineName()
                 .Enrich.WithEnvironmentUserName()
-                .Enrich.WithDemystifiedStackTraces()
                 .Enrich.WithElasticApmCorrelationInfo()
                 .WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri(configuration["ElasticsearchSettings:uri"]))
                 {
