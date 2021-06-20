@@ -2,3 +2,5 @@
 - Serilog
 - EF Core
 - Swagger
+- Elastic.Apm
+- NEST
