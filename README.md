@@ -1,6 +1,6 @@
 # Elastic APM with .NET 5
 - Serilog
-- EF Core
-- Swagger
+- Entity Framework Core
 - Elastic.Apm
 - NEST
+- Swagger Swashbuckle
