@@ -5,8 +5,7 @@
     <DockerTargetOS>Linux</DockerTargetOS>
     <ProjectGuid>18f6d3a5-091f-4a10-b5bc-57e2239c80d6</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
-    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/weatherforecast</DockerServiceUrl>
-    <DockerServiceName>sample-elasticsearch</DockerServiceName>
+    <DockerServiceName>elastic-apm-dotnet</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.yml" />
