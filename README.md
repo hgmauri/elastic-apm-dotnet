@@ -4,3 +4,4 @@
 - Elastic.Apm
 - NEST
 - Swagger Swashbuckle
+- Exception Middleware
