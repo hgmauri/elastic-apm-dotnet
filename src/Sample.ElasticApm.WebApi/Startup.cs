@@ -4,9 +4,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Sample.ElasticApm.WebApi.Core.Extensions;
-using Sample.ElasticApm.WebApi.Core.Middleware;
 
 namespace Sample.ElasticApm.WebApi
 {
@@ -21,37 +19,21 @@ namespace Sample.ElasticApm.WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRouting(options => options.LowercaseUrls = true);
-
+            services.AddApiConfiguration();
+            
             services.AddElasticsearch(Configuration);
             services.AddSqlDatabase(Configuration);
-            services.AddServices();
             services.AddSwagger(Configuration);
 
             services.AddHealthCheckApi(Configuration);
-
-            services.AddHttpClient();
-
-            services.AddControllers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseMiddleware<RequestSerilLogMiddleware>();
-            app.UseMiddleware<ErrorHandlingMiddleware>();
+            app.UseApiConfiguration(env);
                 
             app.UseSwaggerDoc();
-
             app.UseElasticApm(Configuration);
-            
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
             app.UseHealthCheckApi();
 
             app.UseEndpoints(endpoints =>

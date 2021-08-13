@@ -14,7 +14,7 @@ namespace Sample.ElasticApm.WebApi.Core.Extensions
             //https://www.elastic.co/guide/en/apm/agent/dotnet/master/serilog.html
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
-                .Enrich.WithProperty("ApplicationName", $"API Elastic APM - {Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}")
+                .Enrich.WithProperty("ApplicationName", $"API Elastic APM - {Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT")}")
                 .Enrich.FromLogContext()
                 .Enrich.WithMachineName()
                 .Enrich.WithEnvironmentUserName()
