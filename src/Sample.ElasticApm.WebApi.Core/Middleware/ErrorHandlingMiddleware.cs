@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
 using Serilog;
 using System;
 using System.Net;
@@ -34,10 +33,7 @@ namespace Sample.ElasticApm.WebApi.Core.Middleware
 
             var code = HttpStatusCode.InternalServerError;
 
-            if (exception != null) 
-                code = HttpStatusCode.BadRequest;
-
-            var result = JsonConvert.SerializeObject(new { error = exception?.Message });
+            var result = System.Text.Json.JsonSerializer.Serialize(new { error = exception?.Message });
 
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)code;

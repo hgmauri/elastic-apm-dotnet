@@ -1,7 +1,7 @@
 version: '2.2'
 services:
   apm-server:
-    image: docker.elastic.co/apm/apm-server:7.13.3
+    image: docker.elastic.co/apm/apm-server:7.14.0
     depends_on:
       elasticsearch:
         condition: service_healthy
@@ -27,7 +27,7 @@ services:
       test: curl --write-out 'HTTP %{http_code}' --fail --silent --output /dev/null http://localhost:8200/
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.13.3
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.14.0
     environment:
     - bootstrap.memory_lock=true
     - cluster.name=docker-cluster
@@ -50,7 +50,7 @@ services:
       test: curl -s http://localhost:9200/_cluster/health | grep -vq '"status":"red"'
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.13.3
+    image: docker.elastic.co/kibana/kibana:7.14.0
     depends_on:
       elasticsearch:
         condition: service_healthy

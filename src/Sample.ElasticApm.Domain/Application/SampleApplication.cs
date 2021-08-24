@@ -8,7 +8,6 @@ using Sample.ElasticApm.Domain.Interface;
 using Sample.ElasticApm.Domain.Model;
 using Sample.ElasticApm.Persistence.Context;
 using Sample.ElasticApm.Persistence.Entity;
-using static System.Int32;
 
 namespace Sample.ElasticApm.Domain.Application
 {
@@ -48,11 +47,13 @@ namespace Sample.ElasticApm.Domain.Application
 
         public void PostDataSql()
         {
-            var pessoa = new Pessoa();
-            pessoa.DataNascimento = DateTime.Now;
-            pessoa.Endereco = "Teste teste teste teste teste teste teste teste teste teste teste teste teste ";
-            
-            for (int i = 0; i < 200; i++)
+            var pessoa = new Pessoa
+            {
+                DataNascimento = DateTime.Now,
+                Endereco = "Teste teste teste teste teste teste teste teste teste"
+            };
+
+            for (var i = 0; i < 200; i++)
             {
                 pessoa.Id = Guid.NewGuid();
                 pessoa.Nome = $"Pessoa teste {i}";
@@ -62,8 +63,8 @@ namespace Sample.ElasticApm.Domain.Application
             _context.SaveChanges();
 
             var pessoas = _context.Pessoas.Where(p => p.Nome.Contains("Pessoa")).ToList();
+            var enderecos = _context.Pessoas.Where(p => p.Endereco.Contains("teste")).ToList();
         }
-
 
         public void PostSampleException()
         {
@@ -112,7 +113,7 @@ namespace Sample.ElasticApm.Domain.Application
         public ICollection<IndexActorsModel> GetActorsAllCondition(string term)
         {
             var query = new QueryContainerDescriptor<IndexActorsModel>().Bool(b => b.Must(m => m.Exists(e => e.Field(f => f.Description))));
-            TryParse(term, out int numero);
+            int.TryParse(term, out int numero);
 
             query = query && new QueryContainerDescriptor<IndexActorsModel>().Wildcard(w => w.Field(f => f.Name).Value($"*{term}*")) 
                     || new QueryContainerDescriptor<IndexActorsModel>().Wildcard(w => w.Field(f => f.Description).Value($"*{term}*"))
