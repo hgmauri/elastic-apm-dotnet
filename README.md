@@ -5,3 +5,5 @@
 - NEST
 - Swagger Swashbuckle
 - Exception Middleware
+
+https://hgmauri.medium.com/elasticsearch-no-azure-74d0b30211a1
