@@ -1,4 +1,4 @@
-# Elastic APM with .NET 5.0
+# Elastic APM with .NET 6.0
 - Serilog
 - Entity Framework Core
 - Elastic.Apm
@@ -6,4 +6,4 @@
 - Swagger Swashbuckle
 - Exception Middleware
 
-https://hgmauri.medium.com/elasticsearch-no-azure-74d0b30211a1
+https://henriquemauri.net/elasticsearch-no-azure
