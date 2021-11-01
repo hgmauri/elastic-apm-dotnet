@@ -1,80 +1,79 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Sample.ElasticApm.Domain.Interface;
 
-namespace Sample.ElasticApm.WebApi.Controllers
+namespace Sample.ElasticApm.WebApi.Controllers;
+
+[Route("api/[controller]")]
+public class SampleController : Controller
 {
-    [Route("api/[controller]")]
-    public class SampleController : Controller
+    private readonly ISampleApplication _sampleApplication;
+
+    public SampleController(ISampleApplication sampleApplication)
     {
-        private readonly ISampleApplication _sampleApplication;
+        _sampleApplication = sampleApplication;
+    }
 
-        public SampleController(ISampleApplication sampleApplication)
-        {
-            _sampleApplication = sampleApplication;
-        }
+    [HttpPost("elastic")]
+    public IActionResult PostSampleElastic()
+    {
+        _sampleApplication.PostSampleElastic();
 
-        [HttpPost("elastic")]
-        public IActionResult PostSampleElastic()
-        {
-            _sampleApplication.PostSampleElastic();
+        return Ok(new { Result = "Data successfully registered with Elasticsearch" });
+    }
 
-            return Ok(new { Result = "Data successfully registered with Elasticsearch" });
-        }
+    [HttpPost("exception")]
+    public IActionResult PostException()
+    {
+        _sampleApplication.PostSampleException();
 
-        [HttpPost("exception")]
-        public IActionResult PostException()
-        {
-            _sampleApplication.PostSampleException();
+        return BadRequest();
+    }
 
-            return BadRequest();
-        }
+    [HttpPost("sql")]
+    public IActionResult PostSampleSql()
+    {
+        _sampleApplication.PostDataSql();
 
-        [HttpPost("sql")]
-        public IActionResult PostSampleSql()
-        {
-            _sampleApplication.PostDataSql();
+        return Ok();
+    }
 
-            return Ok();
-        }
+    [HttpGet("")]
+    public IActionResult GetAll()
+    {
+        var result = _sampleApplication.GetAll();
 
-        [HttpGet("")]
-        public IActionResult GetAll()
-        {
-            var result = _sampleApplication.GetAll();
+        return Json(result);
+    }
 
-            return Json(result);
-        }
+    [HttpGet("term")]
+    public IActionResult GetByAllCondictions([FromQuery] string term)
+    {
+        var result = _sampleApplication.GetActorsAllCondition(term);
 
-        [HttpGet("term")]
-        public IActionResult GetByAllCondictions([FromQuery] string term)
-        {
-            var result = _sampleApplication.GetActorsAllCondition(term);
+        return Json(result);
+    }
 
-            return Json(result);
-        }
+    [HttpGet("aggregation")]
+    public IActionResult GetActorsAggregation()
+    {
+        var result = _sampleApplication.GetActorsAggregation();
 
-        [HttpGet("aggregation")]
-        public IActionResult GetActorsAggregation()
-        {
-            var result = _sampleApplication.GetActorsAggregation();
+        return Json(result);
+    }
 
-            return Json(result);
-        }
+    [HttpGet("call-google")]
+    public IActionResult GetGoogle()
+    {
+        _sampleApplication.GetGoogle();
 
-        [HttpGet("call-google")]
-        public IActionResult GetGoogle()
-        {
-            _sampleApplication.GetGoogle();
+        return Ok();
+    }
 
-            return Ok();
-        }
+    [HttpGet("call-api")]
+    public IActionResult GetApiTest()
+    {
+        _sampleApplication.GetApiTest();
 
-        [HttpGet("call-api")]
-        public IActionResult GetApiTest()
-        {
-            _sampleApplication.GetApiTest();
-
-            return Ok();
-        }
+        return Ok();
     }
 }

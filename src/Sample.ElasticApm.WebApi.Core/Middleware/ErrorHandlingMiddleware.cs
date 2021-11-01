@@ -4,40 +4,39 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace Sample.ElasticApm.WebApi.Core.Middleware
+namespace Sample.ElasticApm.WebApi.Core.Middleware;
+
+public class ErrorHandlingMiddleware
 {
-    public class ErrorHandlingMiddleware
+    private readonly RequestDelegate next;
+
+    public ErrorHandlingMiddleware(RequestDelegate next)
     {
-        private readonly RequestDelegate next;
+        this.next = next;
+    }
 
-        public ErrorHandlingMiddleware(RequestDelegate next)
+    public async Task Invoke(HttpContext context)
+    {
+        try
         {
-            this.next = next;
+            await next(context);
         }
-
-        public async Task Invoke(HttpContext context)
+        catch (Exception ex)
         {
-            try
-            {
-                await next(context);
-            }
-            catch (Exception ex)
-            {
-                await HandleExceptionAsync(context, ex);
-            }
+            await HandleExceptionAsync(context, ex);
         }
+    }
 
-        private static Task HandleExceptionAsync(HttpContext context, Exception exception)
-        {
-            Log.Error(exception, "Erro não tratado");
+    private static Task HandleExceptionAsync(HttpContext context, Exception exception)
+    {
+        Log.Error(exception, "Erro não tratado");
 
-            var code = HttpStatusCode.InternalServerError;
+        var code = HttpStatusCode.InternalServerError;
 
-            var result = System.Text.Json.JsonSerializer.Serialize(new { error = exception?.Message });
+        var result = System.Text.Json.JsonSerializer.Serialize(new { error = exception?.Message });
 
-            context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)code;
-            return context.Response.WriteAsync(result);
-        }
+        context.Response.ContentType = "application/json";
+        context.Response.StatusCode = (int)code;
+        return context.Response.WriteAsync(result);
     }
 }

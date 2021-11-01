@@ -2,23 +2,22 @@
 using Serilog.Context;
 using System.Threading.Tasks;
 
-namespace Sample.ElasticApm.WebApi.Core.Middleware
+namespace Sample.ElasticApm.WebApi.Core.Middleware;
+
+public class RequestSerilLogMiddleware
 {
-    public class RequestSerilLogMiddleware
+    private readonly RequestDelegate _next;
+
+    public RequestSerilLogMiddleware(RequestDelegate next)
     {
-        private readonly RequestDelegate _next;
+        _next = next;
+    }
 
-        public RequestSerilLogMiddleware(RequestDelegate next)
+    public Task Invoke(HttpContext context)
+    {
+        using (LogContext.PushProperty("UserName", context?.User?.Identity?.Name ?? "anônimo"))
         {
-            _next = next;
-        }
-
-        public Task Invoke(HttpContext context)
-        {
-            using (LogContext.PushProperty("UserName", context?.User?.Identity?.Name ?? "anônimo"))
-            {
-                return _next.Invoke(context);
-            }
+            return _next.Invoke(context);
         }
     }
 }
