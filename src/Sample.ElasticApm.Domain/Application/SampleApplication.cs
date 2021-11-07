@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Nest;
 using Sample.ElasticApm.Domain.Interface;
 using Sample.ElasticApm.Domain.Model;
@@ -31,7 +32,7 @@ public class SampleApplication : ISampleApplication
         if (!_elasticClient.Indices.Exists(nameof(IndexActorsModel).ToLower()).Exists)
             _elasticClient.Indices.Create(nameof(IndexActorsModel).ToLower());
 
-        _elasticClient.IndexMany<IndexActorsModel>(IndexActorsModel.GetSampleData());
+        _elasticClient.IndexMany(IndexActorsModel.GetSampleData());
 
         //or
         descriptor.UpdateMany<IndexActorsModel>(IndexActorsModel.GetSampleData(), (b, u) => b
@@ -47,6 +48,7 @@ public class SampleApplication : ISampleApplication
 
     public void PostDataSql()
     {
+        _context.Database.Migrate();
         var pessoa = new Pessoa
         {
             DataNascimento = DateTime.Now,
@@ -115,7 +117,7 @@ public class SampleApplication : ISampleApplication
         var query = new QueryContainerDescriptor<IndexActorsModel>().Bool(b => b.Must(m => m.Exists(e => e.Field(f => f.Description))));
         int.TryParse(term, out var numero);
 
-        query = query && new QueryContainerDescriptor<IndexActorsModel>().Wildcard(w => w.Field(f => f.Name).Value($"*{term}*")) 
+        query = query && new QueryContainerDescriptor<IndexActorsModel>().Wildcard(w => w.Field(f => f.Name).Value($"*{term}*"))
                 || new QueryContainerDescriptor<IndexActorsModel>().Wildcard(w => w.Field(f => f.Description).Value($"*{term}*"))
                 || new QueryContainerDescriptor<IndexActorsModel>().Term(w => w.Age, numero)
                 || new QueryContainerDescriptor<IndexActorsModel>().Term(w => w.TotalMovies, numero);

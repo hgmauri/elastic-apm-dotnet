@@ -15,9 +15,7 @@ public class RequestSerilLogMiddleware
 
     public Task Invoke(HttpContext context)
     {
-        using (LogContext.PushProperty("UserName", context?.User?.Identity?.Name ?? "anônimo"))
-        {
-            return _next.Invoke(context);
-        }
+        using var property = LogContext.PushProperty("UserName", context?.User?.Identity?.Name ?? "anônimo");
+        return _next.Invoke(context);
     }
 }
