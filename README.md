@@ -3,6 +3,7 @@
 - Entity Framework Core
 - Elastic.Apm
 - NEST
+- Elastic.Apm.NetCoreAll
 - Swagger Swashbuckle
 - Exception Middleware
 
