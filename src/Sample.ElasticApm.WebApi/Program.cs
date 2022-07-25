@@ -4,8 +4,8 @@ using Sample.ElasticApm.WebApi.Core.Extensions;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
-SerilogExtensions.AddSerilog(builder.Configuration);
-builder.Host.UseSerilog(Log.Logger);
+builder.AddSerilog(builder.Configuration, "API Elastic APM");
+Log.Information("Starting API");
 
 builder.Services.AddApiConfiguration();
 
