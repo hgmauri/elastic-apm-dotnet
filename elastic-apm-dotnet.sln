@@ -1,13 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30105.148
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "src\docker-compose.dcproj", "{18F6D3A5-091F-4A10-B5BC-57E2239C80D6}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{1F4C7FFA-7156-4355-A604-34293A63EDB1}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{E28E2BD8-FC75-4726-89D4-60BA3D739963}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.ElasticApm.Domain", "src\Sample.ElasticApm.Domain\Sample.ElasticApm.Domain.csproj", "{8658634B-3465-4D05-8E17-C56D5DD99B7C}"
 EndProject
@@ -15,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.ElasticApm.WebApi", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.ElasticApm.WebApi.Core", "src\Sample.ElasticApm.WebApi.Core\Sample.ElasticApm.WebApi.Core.csproj", "{B5CD0238-4A34-4447-8137-61EDCFCD4244}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.ElasticApm.Persistence", "src\Sample.ElasticApm.Persistence\Sample.ElasticApm.Persistence.csproj", "{358A4E63-B742-41DE-9479-C7EE155507A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.ElasticApm.Persistence", "src\Sample.ElasticApm.Persistence\Sample.ElasticApm.Persistence.csproj", "{358A4E63-B742-41DE-9479-C7EE155507A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,12 +42,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{8658634B-3465-4D05-8E17-C56D5DD99B7C} = {E28E2BD8-FC75-4726-89D4-60BA3D739963}
-		{658ECB5B-3750-41E9-9639-66204FEA6249} = {1F4C7FFA-7156-4355-A604-34293A63EDB1}
-		{B5CD0238-4A34-4447-8137-61EDCFCD4244} = {1F4C7FFA-7156-4355-A604-34293A63EDB1}
-		{358A4E63-B742-41DE-9479-C7EE155507A3} = {E28E2BD8-FC75-4726-89D4-60BA3D739963}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EED24293-FCEB-4257-A890-7B61D64A99FE}
