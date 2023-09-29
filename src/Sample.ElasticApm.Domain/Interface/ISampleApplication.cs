@@ -6,9 +6,9 @@ namespace Sample.ElasticApm.Domain.Interface;
 
 public interface ISampleApplication
 {
-    void PostSampleElastic();
+    Task PostSampleElastic();
     void PostSampleException();
-    void PostDataSql();
+    Task PostDataSql();
     ICollection<IndexActorsModel> GetAll();
     ICollection<IndexActorsModel> GetActorsAllCondition(string term);
     ActorsAggregationModel GetActorsAggregation();

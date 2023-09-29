@@ -25,10 +25,13 @@ public static class ElasticsearchExtensions
         if (!string.IsNullOrEmpty(basicAuthUser) && !string.IsNullOrEmpty(basicAuthPassword))
             settings = settings.BasicAuthentication(basicAuthUser, basicAuthPassword);
 
-        var client = new ElasticClient(settings);
+        settings.EnableApiVersioningHeader();
+        settings.EnableHttpCompression();
 
-        //https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/lifetimes.html
-        services.AddSingleton<IElasticClient>(client);
+		var client = new ElasticClient(settings);
+        
+		//https://www.elastic.co/guide/en/elasticsearch/client/net-api/current/lifetimes.html
+		services.AddSingleton<IElasticClient>(client);
 
         //https://www.elastic.co/guide/en/apm/agent/dotnet/current/config-http.html#config-capture-body
         services.Configure<KestrelServerOptions>(options => options.AllowSynchronousIO = true);

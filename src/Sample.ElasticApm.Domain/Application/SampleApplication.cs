@@ -25,30 +25,30 @@ public class SampleApplication : ISampleApplication
         _client = client;
     }
 
-    public void PostSampleElastic()
+    public async Task PostSampleElastic()
     {
         var descriptor = new BulkDescriptor();
 
-        if (!_elasticClient.Indices.Exists(nameof(IndexActorsModel).ToLower()).Exists)
-            _elasticClient.Indices.Create(nameof(IndexActorsModel).ToLower());
+        if (!(await _elasticClient.Indices.ExistsAsync(nameof(IndexActorsModel).ToLower())).Exists)
+            await _elasticClient.Indices.CreateAsync(nameof(IndexActorsModel).ToLower());
 
-        _elasticClient.IndexMany(IndexActorsModel.GetSampleData());
+        await _elasticClient.IndexManyAsync(IndexActorsModel.GetSampleData());
 
         //or
-        descriptor.UpdateMany<IndexActorsModel>(IndexActorsModel.GetSampleData(), (b, u) => b
+        descriptor.UpdateMany(IndexActorsModel.GetSampleData(), (b, u) => b
             .Index(nameof(IndexActorsModel).ToLower())
             .Doc(u)
             .DocAsUpsert());
 
-        var insert = _elasticClient.Bulk(descriptor);
+        var insert = await _elasticClient.BulkAsync(descriptor);
 
         if (!insert.IsValid)
             throw new Exception(insert.OriginalException.ToString());
     }
 
-    public void PostDataSql()
+    public async Task PostDataSql()
     {
-        _context.Database.Migrate();
+        await _context.Database.MigrateAsync();
         var pessoa = new Pessoa
         {
             DataNascimento = DateTime.Now,
@@ -62,7 +62,7 @@ public class SampleApplication : ISampleApplication
             _context.Pessoas.Add(pessoa);
         }
 
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
 
         var pessoas = _context.Pessoas.Where(p => p.Nome.Contains("Pessoa")).ToList();
         var enderecos = _context.Pessoas.Where(p => p.Endereco.Contains("teste")).ToList();

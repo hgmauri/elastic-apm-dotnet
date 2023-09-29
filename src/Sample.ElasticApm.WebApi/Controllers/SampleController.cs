@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Sample.ElasticApm.Domain.Interface;
+using System.Threading.Tasks;
 
 namespace Sample.ElasticApm.WebApi.Controllers;
 
@@ -14,9 +15,9 @@ public class SampleController : Controller
     }
 
     [HttpPost("elastic")]
-    public IActionResult PostSampleElastic()
+    public async Task<IActionResult> PostSampleElasticAsync()
     {
-        _sampleApplication.PostSampleElastic();
+        await _sampleApplication.PostSampleElastic();
 
         return Ok(new { Result = "Data successfully registered with Elasticsearch" });
     }
@@ -30,9 +31,9 @@ public class SampleController : Controller
     }
 
     [HttpPost("sql")]
-    public IActionResult PostSampleSql()
+    public async Task<IActionResult> PostSampleSqlAsync()
     {
-        _sampleApplication.PostDataSql();
+        await _sampleApplication.PostDataSql();
 
         return Ok();
     }
