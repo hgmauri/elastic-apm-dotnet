@@ -14,7 +14,6 @@ public static class SerilogExtensions
 {
     public static WebApplicationBuilder AddSerilog(this WebApplicationBuilder builder, IConfiguration configuration, string applicationName)
     {
-        //https://www.elastic.co/guide/en/apm/agent/dotnet/master/serilog.html
         Log.Logger = new LoggerConfiguration()
             .ReadFrom.Configuration(configuration)
             .Enrich.FromLogContext()
