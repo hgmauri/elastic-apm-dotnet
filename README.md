@@ -1,4 +1,4 @@
-# Elastic APM with .NET 7.0
+# Elastic APM with .NET 8.0
 
 - Serilog
 - Entity Framework Core
